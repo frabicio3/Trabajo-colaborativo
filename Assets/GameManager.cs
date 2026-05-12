@@ -16,13 +16,13 @@ public class GameManager : MonoBehaviour
     public void AddScore(int amount)
     {
         score += amount;
-        Debug.Log("Monedas: " + score);
+        Debug.Log("Coins: " + score);
     }
 
     public void LoseLife()
     {
         lives--;
-        Debug.Log("Vidas: " + lives);
+        Debug.Log("Lives: " + lives);
 
         if (lives <= 0)
         {
@@ -34,12 +34,13 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("GAME OVER");
 
-        // Reinicia la escena después de 2 segundos
         Invoke("RestartGame", 2f);
     }
 
     void RestartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(
+            SceneManager.GetActiveScene().buildIndex
+        );
     }
 }

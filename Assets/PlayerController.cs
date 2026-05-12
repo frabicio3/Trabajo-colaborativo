@@ -18,12 +18,6 @@ public class PlayerController : MonoBehaviour
     {
         Move();
         Jump();
-
-        // Reinicio si cae muy abajo
-        if (transform.position.y < -5f)
-        {
-            Respawn();
-        }
     }
 
     void Move()
@@ -32,14 +26,24 @@ public class PlayerController : MonoBehaviour
         float vertical = Input.GetAxis("Vertical");
 
         Vector3 movement = new Vector3(horizontal, 0, vertical);
-        rb.linearVelocity = new Vector3(movement.x * speed, rb.linearVelocity.y, movement.z * speed);
+
+        rb.linearVelocity = new Vector3(
+            movement.x * speed,
+            rb.linearVelocity.y,
+            movement.z * speed
+        );
     }
 
     void Jump()
     {
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce, rb.linearVelocity.z);
+            rb.linearVelocity = new Vector3(
+                rb.linearVelocity.x,
+                jumpForce,
+                rb.linearVelocity.z
+            );
+
             isGrounded = false;
         }
     }
@@ -50,16 +54,5 @@ public class PlayerController : MonoBehaviour
         {
             isGrounded = true;
         }
-
-        if (collision.gameObject.CompareTag("Lava"))
-        {
-            Respawn();
-        }
-    }
-
-    void Respawn()
-    {
-        transform.position = respawnPoint.position;
-        rb.linearVelocity = Vector3.zero;
     }
 }
